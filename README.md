@@ -10,6 +10,8 @@ with each day a new notion on the language/paradigm/technology you chose to work
 ## Modules
 
 The following modules must be validated in this order:
+
+
 • [Module 00 - Encapsulation](https://github.com/Dutschke-julien/Piscine-Object/blob/master/Subjects/mod_0.pdf)
 This module will introduce you to the concept of encapsulation.
 
