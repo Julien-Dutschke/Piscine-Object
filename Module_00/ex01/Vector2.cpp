@@ -1,6 +1,17 @@
 #include "Vector2.hpp"
 
-Vector2::Vector2(float x, float y) : _x(x), _y(y){
+Vector2::Vector2(float x, float y)
+{
+    if (x < 0)
+    {
+        x = 0;
+    }
+    if (y < 0)
+    {
+        y = 0;
+    }
+    _x = x;
+    _y = y;
 }
 
 float Vector2::getX() const{

@@ -1,7 +1,8 @@
 #include "Graph.hpp"
 
 
-int main(){
+int main()
+{
     Graph graph(Vector2(10, 10));
     graph.addNode(Vector2(0, 0));
     graph.addNode(Vector2(1, 1));
@@ -14,6 +15,7 @@ int main(){
     graph.addNode(Vector2(8, 8));
     graph.addNode(Vector2(9, 9));
     graph.addNode(Vector2(10, 10));
+    graph.addNode(Vector2(2,1));
     graph.printGraph();
     return 0;
 }
