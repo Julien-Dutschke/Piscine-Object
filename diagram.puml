@@ -1,125 +1,152 @@
 @startuml
 
-abstract class LinkablePart {
-  {abstract} void execute(float p_pression)
+abstract class LinkablePart
+{
+  +{abstract} void execute(float p_pression)
 }
 
-class Wheel {
-  void executeRotation(float p_force)
+class Wheel
+{
+  +void executeRotation(float p_force)
 }
 
-class Gear {
-  int demultiplier
+class Gear
+{
+  +int demultiplier
 }
 
-class GearLever {
-  Gear[] gears
-  int level
-  void change()
-  Gear* activeGear()
+class GearLever
+{
+  +Gear[] gears
+  +int level
+  +void change()
+  +Gear* activeGear()
 }
 
-class Transmission {
-  Wheel*[] wheels
-  void activate(float p_force)
+class Transmission
+{
+  +std::vector<Wheel*> weels 
+  +void activate(float p_force)
 }
 
-class Crankshaft {
-  Transmission* transmission
-  void receiveForce(float p_volume)
+class Crankshaft
+{
+  +Transmission* transmission
+  +void receiveForce(float p_volume)
 }
 
-class ExplosionChamber {
-  Crankshaft* crankshaft
-  void fill(float p_volume)
+class ExplosionChamber
+{
+  + Crankshaft* crankshaft
+  + void fill(float p_volume)
 }
 
-class Injector {
-  ExplosionChamber* explosionChamber
-  void execute(float p_pression)
+class Injector
+{
+  + ExplosionChamber* explosionChamber
+  + void execute(float p_pression)
 }
 
-class Motor {
-  Injector injector
-  ExplosionChamber explosionChamber
-  Crankshaft crankshaft
-  void connectToTransmission(Transmission* p_transmission)
+class Motor
+{
+  +Injector injector
+  +ExplosionChamber explosionChamber
+  +Crankshaft crankshaft
+  +void connectToTransmission(Transmission* p_transmission)
 }
 
-class Pedal {
-  LinkablePart* target
-  void setTarget(LinkablePart* p_part)
-  void use(float p_pression)
+class Pedal
+{
+  +LinkablePart* target
+  +void setTarget(LinkablePart* p_part)
+  +void use(float p_pression)
 }
 
-class Direction {
-  Wheel[] wheels
-  void turn(float p_angle)
+class Direction
+{
+  +Wheel[] wheels
+  +void turn(float p_angle)
 }
 
-class DAE {
-  Direction* direction
-  float force
-  void use(float p_angle)
+class DAE
+{
+  +Direction* direction
+  +float force
+  +void use(float p_angle)
 }
 
-class SteerWheel {
-  DAE* dae
-  void turn(float p_angle)
+class SteerWheel
+{
+  +DAE* dae
+  +void turn(float p_angle)
 }
 
-class Brake {
-  Wheel* wheel
-  void execute(float p_force)
-  void attackWheel(Wheel* p_wheel)
+
+class Brake
+{
+  +Wheel* wheel
+  +void execute(float p_force)
+  +void attackWheel(Wheel* p_wheel)
 }
 
-class BrakeController {
-  Brake[] brakes
-  void execute(float p_pression)
+class BrakeController
+{
+  +Brake[] brakes
+  +void execute(float p_pression)
 }
 
-class Cockpit {
-  Pedal pedal
-  SteerWheel steerWheel
-  GearLever gearLever
-  // Ajoutez ici les méthodes de gestion des objets
+class Cockpit 
+{
+  +Pedal pedal
+  +SteerWheel steerWheel
+  +GearLever gearLever
+  
+  + void setPedal(Pedal * _pedal)
+  + void setSteerWheel(SteerWheel * _steerWheel)
+  + void setGearLever(GearLever * _gearLever)
+  
 }
 
 class Electronics {
-  DAE dae
+  +DAE dae
 }
 
-class Car {
-  BrakeController brakeController
-  Direction direction
-  Transmission transmission
-  Motor motor
-  Electronics electronics
-  Cockpit cockpit
+class Car
+{
+  +BrakeController brakeController
+  +Direction direction
+  +Transmission transmission
+  +Motor motor
+  +Electronics electronics
+  +Cockpit cockpit
+  
 }
 
-Transmission "1" -- "0..*" Wheel
-GearLever
-Crankshaft "1" -- "1" Transmission
-ExplosionChamber "1" -- "1" Crankshaft
-Injector -|> LinkablePart
-Motor "1" -- "1" Injector
-Motor "1" -- "1" ExplosionChamber
-Motor "1" -- "1" Crankshaft
-Pedal -- LinkablePart : Contains
-SteerWheel -- DAE : Contains
-Brake "1" -- "1" Wheel
-BrakeController -|> LinkablePart : Inherits
-Cockpit "1" -- "1" Pedal
-Cockpit "1" -- "1" SteerWheel
-Cockpit "1" -- "1" GearLever
-Car "1" -- "1" BrakeController
-Car "1" -- "1" Direction
-Car "1" -- "1" Transmission
-Car "1" -- "1" Motor
-Car "1" -- "1" Electronics
-Car "1" -- "1" Cockpit
+GearLever  <|-- "Singleton<GearLever>"
+Transmission "1" *-- "0.." Wheel
+Crankshaft "1" *-- "0.." Transmission
+ExplosionChamber "1" *--  Crankshaft
+Injector  <|--  LinkablePart
+Injector "1" *-- "0.." ExplosionChamber
+Motor "1 " *-- Injector
+Motor "1  " *-- ExplosionChamber
+Motor "1  " *-- Crankshaft
+Pedal *-- LinkablePart
+Direction *-- Wheel
+DAE *-- Direction
+SteerWheel *-- DAE
+Brake *-- Wheel
+BrakeController <|-- LinkablePart
+Cockpit *-- Pedal
+Cockpit *-- SteerWheel
+Cockpit *-- GearLever
+Electronics *-- DAE
+Car *-- BrakeController
+Car *-- Direction
+Car *-- Transmission
+Car *-- Motor
+Car *-- Electronics
+Car *-- Cockpit
+GearLever *-- Gear
 
 @enduml
-
