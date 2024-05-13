@@ -74,5 +74,3 @@ void Car::apply_emergency_brakes()
 {
     _parkingBrake.apply_emergency_brakes();
 }
-
-// 

@@ -5,7 +5,6 @@
 #include "triangle.hpp"
 #include "rectangle.hpp"
 
-
 int main()
 {
     Circle c(5);
@@ -14,15 +13,13 @@ int main()
 
     std::cout << c << std::endl;
     std::cout << t << std::endl;
-    std::cout << r << std::endl;
 
-    std::cout << "now a proof the rule F of SOLID is working\n" << std::endl;
+    // std::cout << "now a proof the rule L of SO[L]ID is working\n" << std::endl;
 
-    Shape* shapes[] = {&c, &t, &r};
+    // Shape* shapes[] = {&c, &t, &r};
 
-    std::cout << *shapes[0] << std::endl;
-    std::cout << *shapes[1] << std::endl;
-    std::cout << *shapes[2] << std::endl;
-
+    // std::cout << *shapes[0] << std::endl;
+    // std::cout << *shapes[1] << std::endl;
+    // std::cout << *shapes[2] << std::endl;
     return 0;    
 }

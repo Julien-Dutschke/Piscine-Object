@@ -15,4 +15,7 @@ class PackageReductionDiscount : public Command
     };
 };
 
+
+
+
 #endif // __PACKAGE_REDUCTION_DISCOUNT_HPP__

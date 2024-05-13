@@ -5,16 +5,20 @@
 class Hat : public Article
 {
     public:
-    Hat(std::string name, double price) : Article(name, price){};
+    Hat(double price) : Article("Hat", price){};
     Hat* clone() { return new Hat(*this); };
 };
 
-int main()
+class RTX : public Article
 {
-    Hat hat("Hat", 10);
+    public:
+    RTX(double price) : Article("RTX", price){};
+    RTX* clone() { return new RTX(*this); };
+};
 
-    PackageReductionDiscount packageReductionDiscount;
-    packageReductionDiscount.addArticle(&hat, 15);
-
-    std::cout << "Total price with package reduction discount: " << packageReductionDiscount.get_total_prince() << std::endl;
-}
+class DiceSett : public Article
+{
+    public:
+    DiceSett(double price) : Article("DiceSett", price){};
+    DiceSett* clone() { return new DiceSett(*this); };
+};
