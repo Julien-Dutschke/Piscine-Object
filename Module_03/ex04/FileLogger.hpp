@@ -19,6 +19,9 @@ class FileLogger : public ILogger
     public:
 
 
+
+
+
     FileLogger(std::string filename) : file() , _header(NULL)
     {
         file.open(filename.c_str(), std::ios::app | std::ios::out);
@@ -40,6 +43,15 @@ class FileLogger : public ILogger
         }
         std::cout << "FILE "<< filename << " OPEN"<< std::endl;
     }
+
+
+
+
+
+
+
+
+
 
     void write(std::string message)
     {
