@@ -1,140 +1,206 @@
 #include "Bank.hpp"
-#include "Account.hpp"
+#include <signal.h>
+#define CLEAR_TERMINAL "\033[2J\033[1;1H"
 
-Bank::Bank() : _liquidity(0)
+int Bank::Account::_nextId = 0;
+Bank& Bank::operator=(int)
 {
+    return *this;
 }
 
-std::ostream& operator<<(std::ostream& p_os, const Bank& p_bank)
+void Bank::printBank() const
 {
-    std::vector<Account *>::const_iterator it = p_bank._clientAccounts.begin();
-    std::vector<Account *>::const_iterator ite = p_bank._clientAccounts.end();
-    p_os << "Bank informations : " << std::endl;
-    p_os << "Liquidity : " << p_bank.getLiquidity() << std::endl;
-    for (; it != ite; it++)
+    std::cout << "--------------------------------\n";
+    std::cout << "Bank balance : " << _balance << std::endl;
+    for (std::vector<Account>::const_iterator it = _listAccounts.begin(); it != _listAccounts.end(); ++it)
     {
-        p_os << **it << std::endl;
+       it->printAccount();
     }
-    return (p_os);
+    std::cout << "--------------------------------\n";
 }
 
-
-int Bank::getLiquidity() const
-{
-    return (_liquidity);
+void signalHandler(int signum) {
+    std::cout << "Interrupt signal (" << signum << ") received.\n";
+    exit(signum);
 }
 
-void Bank::setLiquidity(int liquidity)
+void Bank::startSimulation()
 {
-    _liquidity = liquidity;
-}
-
-std::vector<Account *> Bank::getClientAccounts() const
-{
-    return (_clientAccounts);
-}
-
-void Bank::removeAccount(Account *account)
-{
-    std::vector<Account *>::iterator it = _clientAccounts.begin();
-    std::vector<Account *>::iterator ite = _clientAccounts.end();
-    for (; it != ite; it++)
+    signal(SIGINT, signalHandler);
+    signal(SIGTERM, signalHandler);
+    std::cout << CLEAR_TERMINAL;
+    while(42)
     {
-        if ((*it)->getId() == account->getId())
+        std::cout << "Welcome to BeerBank\n";
+        std::cout << "--------------------------------\n";
+        std::cout << "[1] Add account       [2] Delete account\n";
+        std::cout << "[3] Add money         [4] Remove money\n";
+        std::cout << "[5] Give loan\n";
+        std::cout << "--------------------------------\n";
+        printBank();
+        int choice = 0;
+        switch (choice = std::cin.get())
         {
-            _clientAccounts.erase(it);
-            return;
+            case '1':
+            {
+                std::string name;
+                std::cout << "Enter the name of the account : ";
+                std::cin >> name;
+                addAccount(name);
+                break;
+            }
+            case '2':
+            {
+                int id;
+                std::cout << "Enter the id of the account : ";
+                std::cin >> id;
+                deleteAccount(id);
+                break;
+            }
+            case '3':
+            {
+                int id;
+                int money;
+                std::cout << "Enter the id of the account : ";
+                std::cin >> id;
+                std::cout << "Enter the amount of money : ";
+                std::cin >> money;
+                addMoneyAccount(id, money);
+                break;
+            }
+            case '4':
+            {
+                int id;
+                int money;
+                std::cout << "Enter the id of the account : ";
+                std::cin >> id;
+                std::cout << "Enter the amount of money : ";
+                std::cin >> money;
+                removeMoneyAccount(id, money);
+                break;
+            }
+            case '5':
+            {
+                int id;
+                int money;
+                std::cout << "Enter the id of the account : ";
+                std::cin >> id;
+                std::cout << "Enter the amount of money : ";
+                std::cin >> money;
+                giveLoan(id, money);
+                break;
+            }
+            default:
+            {
+                std::cout << "Invalid choice\n";
+                break;
+            }
+        }
+        if (std::cin.eof())
+        {
+            break;
+        }
+        std::cout << "Press Any Key to Continue\n";
+        std::cin.get();
+        std::cout << CLEAR_TERMINAL;
+    }
+}
+
+Bank::Bank() : _balance(42000)
+{
+    std::cout << "BeerBank constructed by Tolkgrim" << std::endl;
+}
+
+Bank& Bank::getInstance()
+{
+    static Bank instance;
+    return instance;
+}
+
+Bank::Account Bank::operator[](int id) const
+{
+    for (std::vector<Account>::const_iterator it = _listAccounts.begin(); it != _listAccounts.end(); ++it)
+    {
+        if (it->getId() == id)
+        {
+            return *it;
+        }
+    }
+    throw std::exception();
+}
+
+void Bank::addAccount(std::string name)
+{
+    _listAccounts.push_back(Account(name));
+}
+
+void Bank::deleteAccount(int id)
+{
+    for (std::vector<Account>::iterator it = _listAccounts.begin(); it != _listAccounts.end(); ++it)
+    {
+        if (it->getId() == id)
+        {
+            _listAccounts.erase(it);
+            break;
         }
     }
 }
 
-void Bank::addAccount(Account *account)
+void Bank::addMoneyAccount(int id, int money)
 {
-    std::vector<Account *>::iterator it = _clientAccounts.begin();
-    std::vector<Account *>::iterator ite = _clientAccounts.end();
-    for (; it != ite; it++)
+    if (money < 0)
     {
-        if ((*it)->getId() == account->getId())
-            return;
-    }
-    _clientAccounts.push_back(account);
-}
-
-void Bank::giveLoan(Account *account, int value)
-{
-    if (value > _liquidity)
+        std::cout << "You can't add negative money" << std::endl;
         return;
-    _liquidity -= value;
-    account->_value += value;
+    }
+    for (std::vector<Account>::iterator it = _listAccounts.begin(); it != _listAccounts.end(); ++it)
+    {
+        if (it->getId() == id)
+        {
+            it->_balance = (it->getBalance() + (money * 0.95));
+            _balance += money * 0.05;
+            return;
+        }
+    }
 }
 
-void Bank::giveLoan(int id, int value)
+void Bank::removeMoneyAccount(int id, int money)
 {
-    std::vector<Account *>::iterator it = _clientAccounts.begin();
-    std::vector<Account *>::iterator ite = _clientAccounts.end();
-    for (; it != ite; it++)
+    if (money < 0)
     {
-        if ((*it)->getId() == id)
+        std::cout << "You can't remove negative money" << std::endl;
+        return;
+    }
+    for (std::vector<Account>::iterator it = _listAccounts.begin(); it != _listAccounts.end(); ++it)
+    {
+        if (it->getId() == id)
         {
-            if (value > _liquidity)
+            if (it->getBalance() < money)
+            {
+                std::cout << "Not enough money" << std::endl;
                 return;
-            _liquidity -= value;
-            (*it)->_value += value;
+            }
+            it->_balance =(it->getBalance() - money);
             return;
         }
     }
 }
 
-void Bank::addAccountValue(int id, int value)
+void Bank::giveLoan(int id, int money)
 {
-    std::vector<Account *>::iterator it = _clientAccounts.begin();
-    std::vector<Account *>::iterator ite = _clientAccounts.end();
-    for (; it != ite; it++)
+    if (money < 0)
     {
-        if ((*it)->getId() == id)
-        {
-            _liquidity += (value * 0.05);
-            (*it)->_value += (value * 0.95);
-            return;
-        }
+        std::cout << "You can't give negative money" << std::endl;
+        return;
     }
-}
-
-void Bank::addAccountValue(Account *account, int value)
-{
-    _liquidity += (value * 0.05);
-    account->_value += (value * 0.95);
-}
-
-Bank &Bank::operator-=(int value)
-{
-    _liquidity -= value;
-    return (*this);
-}
-
-Bank &Bank::operator+=(int value)
-{
-    _liquidity += value;
-    return (*this);
-}
-
-void Bank::decreaseAccountValue(int id, int value)
-{
-    std::vector<Account *>::iterator it = _clientAccounts.begin();
-    std::vector<Account *>::iterator ite = _clientAccounts.end();
-    for (; it != ite; it++)
+    for (std::vector<Account>::iterator it = _listAccounts.begin(); it != _listAccounts.end(); ++it)
     {
-        if ((*it)->getId() == id)
+        if (it->getId() == id)
         {
-            (*it)->_value -= value;
+            it->_balance = (it->getBalance() + money);
+            _balance -= money;
             return;
         }
     }
 }
 
-void Bank::decreaseAccountValue(Account *account, int value)
-{
-    account->_value -= value;
-}
-
-// Path: ex00/Account.cpp

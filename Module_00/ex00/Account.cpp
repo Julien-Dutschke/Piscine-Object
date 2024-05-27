@@ -1,26 +1,21 @@
-#include "Account.hpp"
+#include "Bank.hpp"
 
-Account::Account() : _id(_nextId++), _value(0){
+void Bank::Account::printAccount() const
+{
+    std::cout << "Account " << _id << " : " << _name << " : " << _balance << std::endl;
 }
 
-Account::Account(int value) : _id(_nextId++), _value(value){
+Bank::Account::Account(std::string name) : _id(_nextId++), 
+                                           _balance(0), 
+                                           _name(name){}
+
+
+int Bank::Account::getBalance() const
+{
+    return _balance;
 }
 
-int Account::getId() const
+int Bank::Account::getId() const
 {
     return _id;
 }
-
-int Account::getValue() const
-{
-    return _value;
-}
-
-std::ostream& operator<< (std::ostream& p_os, const Account& p_account)
-{
-    p_os << "[" << p_account._id << "] - [" << p_account._value << "]";
-    return (p_os);
-}
-
-
-int Account::_nextId = 1;

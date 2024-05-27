@@ -3,35 +3,48 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <cstdlib>
 
-class Account; 
 
-class Bank{
+class Bank
+{
+    private:
+    Bank& operator=(int);
+    //! Account class
+    class Account
+    {
+        private:
+        int _id;
+        int _balance;
+        std::string _name;
+        static int _nextId;
+        friend class Bank;
 
-    private :
-    int _liquidity;
-    std::vector<Account *> _clientAccounts;
+        public:
+        Account(std::string name);
+        void printAccount() const;
+        int getBalance() const;
+        int getId() const;
+    };
 
-    public :
+    private:
+    int _balance;
+    std::vector<Account> _listAccounts;
     Bank();
 
-    public :
-    void addAccount(Account *account);
-    void addAccountValue(int id, int value);
-    void addAccountValue(Account *account, int value);
-    void decreaseAccountValue(int id, int value);
-    void decreaseAccountValue(Account *account, int value);
-    void removeAccount(Account *account);
-    int getLiquidity() const;
-    void giveLoan(Account *account, int value);
-    void giveLoan(int id, int value);
-    void setLiquidity(int liquidity);
-    std::vector<Account *> getClientAccounts() const;
-    
-    friend std::ostream& operator<<(std::ostream& p_os, const Bank& p_bank);
-    Bank &operator-=(int value);
-    Bank &operator+=(int value);
-};
 
+    public:
+    //!Singetons pattern
+    static Bank& getInstance();
+    void addAccount(std::string name);
+    void deleteAccount(int id);
+    void addMoneyAccount(int id, int money);
+    void startSimulation();
+    void giveLoan(int id, int money);
+    void removeMoneyAccount(int id, int money);
+    Account operator[](int id) const;
+    void printBank() const;
+};
 
 #endif
