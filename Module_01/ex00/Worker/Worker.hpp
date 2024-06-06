@@ -33,11 +33,15 @@ class Worker {
 public:
     // Constructeurs
     Worker();
+    Worker(std::string name);
+    Worker(int x, int y, int level, int exp, std::string name);
     Worker(int x, int y, int level, int exp);
     // Destructeur
     ~Worker();
+
     
     // Méthodes
+    std::string getName();
     int getX(){ return position.x;}
     int getY(){ return position.y;}
     int getLevel(){ return statistic.level;}
@@ -46,15 +50,23 @@ public:
     void setY(int y){ position.y = y;}
     void setLevel(int level){ statistic.level = level;}
     void setExp(int exp){ statistic.exp = exp;}
-    void work();
+    bool work();
     void addTool(Tool* tool);
     void addWorkshop(Workshop* workshop);
     void removeTool();
     void removeWorkshop(Workshop* workshop);
-
+    template <class T>
+    T* getTool()
+    {
+        if(tool == NULL)
+            return NULL;
+        return dynamic_cast<T*>(tool);
+    }
     
 
 private:
+    std::string _name;
+    Worker& operator=(const Worker& worker){(void)worker; return *this;}
     struct Position position;
     struct Statistic statistic;
     Tool* tool;

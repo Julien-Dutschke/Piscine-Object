@@ -1,5 +1,7 @@
 #include "Worker.hpp"
 
+#include "../Shovel/Shovel.hpp"
+
 void Worker::removeTool()
 {
     if (tool != NULL)
@@ -9,17 +11,29 @@ void Worker::removeTool()
     }
 }
 
+std::string Worker::getName()
+{
+    return _name;
+}
+
 Worker::Worker(){
     std::cout << "New Dwarf constructor ⚒️👷" << std::endl;
 }
 
-Worker::Worker(int x, int y, int level, int exp)
+Worker::Worker(std::string name){
+    std::cout << "New Dwarf constructor ⚒️👷" << std::endl;
+    _name = name;
+}
+
+Worker::Worker(int x, int y, int level, int exp, std::string name) : position(x, y), statistic(level, exp)
+{
+    _name = name;
+    std::cout << _name << " just arrived👷⛏️\n";
+}
+
+Worker::Worker(int x, int y, int level, int exp) : position(x, y), statistic(level, exp)
 {
     std::cout << "New Dwarf constructor ⚒️👷" << std::endl;
-    position.x = x;
-    position.y = y;
-    statistic.level = level;
-    statistic.exp = exp;
     std::cout << "Position: " << position.x << ", " << position.y << std::endl;
 }
 
@@ -28,19 +42,21 @@ Worker::~Worker()
     std::cout << "Dwarf destructor" << std::endl;
 }
 
-void Worker::work()
+bool Worker::work()
 {
     if (this->workshops.size() == 0)
     {
-        std::cout << "Worker doesn't work in any workshop" << std::endl;
+        std::cout << _name << " doesn't have any workshop" << std::endl;
+        return false;
     }
     else if (this->tool == NULL)
     {
-        std::cout << "Worker doesn't have a tool" << std::endl;
+        std::cout << _name << " doesn't have any tool" << std::endl;
+        return false;
     }
-    else
+    else 
     {
-        this->tool->Use();
+        return (this->tool->Use());
     }
 }
 
@@ -49,21 +65,32 @@ void Worker::addTool(Tool* tool)
     if (tool == NULL)
     {
         std::cout << "You know , nothing is not really a tool" << std::endl;
+        return;
     }
     else if (tool->getWorker() != NULL)
     {
         Worker* worker = tool->getWorker();
         worker->removeTool();
+        if (this->tool != NULL)
+            this->tool->setWorker(NULL);
         this->tool = tool;
         tool->setWorker(this);
     }
     else
     {
+        if (this->tool != NULL)
+            this->tool->setWorker(NULL);
         this->tool = tool;
         tool->setWorker(this);
     }
+    Tool* identify = dynamic_cast<Shovel*>(tool);
+    if (identify != NULL)
+        std::cout << "Worker " << _name << " just grab his shovel" << std::endl;
+    else
+        std::cout << "Worker " << _name << " just grab his hammer" << std::endl;
 }
 
+//! do not use this function it's for the workshop
 void Worker::addWorkshop(Workshop* workshop)
 {
     if (workshop == NULL)

@@ -13,7 +13,7 @@ public:
     // Destructeur
     ~Shovel();
 
-    void Use();
+    bool Use();
 
 private:
     

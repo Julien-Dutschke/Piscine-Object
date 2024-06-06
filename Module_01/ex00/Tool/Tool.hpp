@@ -20,7 +20,7 @@ public:
     virtual ~Tool();
 
     // Méthodes
-    virtual void Use() = 0;
+    virtual bool Use() = 0;
     Worker* getWorker(){ return worker;}
     void setWorker(Worker* worker){ this->worker = worker;}
 

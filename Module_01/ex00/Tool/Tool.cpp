@@ -1,6 +1,6 @@
 #include "Tool.hpp"
 
-Tool::Tool(): numberOfUses(0)
+Tool::Tool(): numberOfUses(10)
 {
     this->worker = NULL;
 }

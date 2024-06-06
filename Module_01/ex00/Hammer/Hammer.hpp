@@ -12,7 +12,7 @@ public:
     // Destructeur
     ~Hammer();
 
-    void Use();
+    bool Use();
 
 private:
     

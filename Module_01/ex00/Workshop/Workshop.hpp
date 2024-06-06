@@ -11,17 +11,23 @@
 class Workshop {
 public:
     // Constructeurs
+    
     Workshop();
+    Workshop(std::string name);
 
     // Destructeur
     ~Workshop();
 
     void addWorker(Worker* worker);
-    void executeWorkDay();
+    void removeWorker(Worker* worker);
+    bool executeWorkDay();
     
 
-private: 
+private:
+    std::string _name;
+    Workshop& operator=(const Workshop& workshop){ (void)workshop; return *this;}
     std::vector<Worker*> workers;
 };
 
 #endif 
+

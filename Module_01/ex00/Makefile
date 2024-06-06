@@ -1,11 +1,12 @@
 NAME = WorkStarter
 
+
+
 CXX = c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 
-SRC = main.cpp\
-	  Worker/Worker.cpp\
+SRC = Worker/Worker.cpp\
 	  Workshop/Workshop.cpp\
 	  Tool/Tool.cpp\
 	  Shovel/Shovel.cpp\
@@ -13,11 +14,12 @@ SRC = main.cpp\
 
 OBJ = $(SRC:.cpp=.o)
 
+
 all: $(NAME)
 
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) main.cpp -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -26,6 +28,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
 
 .PHONY: all clean fclean re
 
