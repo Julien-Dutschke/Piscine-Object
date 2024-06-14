@@ -1,17 +1,26 @@
 #ifndef __COURSELIST_HPP__
 #define __COURSELIST_HPP__
 
-#include "AList.hpp"
 #include "Course.hpp"
+#include "Singletons.hpp"
+#include <list>
+#include "ListPrinter.hpp"
 
-class CourseList : public AList<Course, CourseList>
+
+class CourseList : public std::list<Course*>, public Singletons<CourseList>, public ListPrinter
 {
+
     private:
-    CourseList() : AList<Course, CourseList>("Course List") {}
-    CourseList(std::string name) : AList<Course, CourseList>(name) {}
-    
+    friend class Singletons<CourseList>;
+
+    private:
+        CourseList(){};
+        CourseList(std::string name) = delete;
+        CourseList(const CourseList& other) = delete;
+
     public:
-     std::string getName() const { return _name; }
+
 };
 
-#endif2
+
+#endif

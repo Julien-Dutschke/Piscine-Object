@@ -1,18 +1,25 @@
 #ifndef __ROOMLIST_HPP__
 #define __ROOMLIST_HPP__
 
-#include "AList.hpp"
-
+#include "Singletons.hpp"
 #include "Room.hpp"
+#include <list>
+#include "ListPrinter.hpp"
 
-class RoomList : public AList<Room, RoomList>
+
+
+class RoomList : public std::list<Room*>, public Singletons<RoomList>, public ListPrinter
 {
     private:
-    RoomList() : AList<Room, RoomList>("Room List") {}
-    RoomList(std::string name) : AList<Room, RoomList>(name) {}
-    
+    friend class Singletons<RoomList>;
+
+    private:
+        RoomList(){}
+        RoomList(std::string name) = delete;
+        RoomList(const RoomList& other) = delete;
+
     public:
-     std::string getName() const { return _name; }
+
 };
 
 #endif

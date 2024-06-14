@@ -1,18 +1,23 @@
 #ifndef __STUDENTLIST_HPP__
 #define __STUDENTLIST_HPP__
 
-#include "AList.hpp"
 #include "Student.hpp"
-#include <vector>
+#include <list>
+#include "Singletons.hpp"
+#include "ListPrinter.hpp"
 
-class StudentList : public AList<Student, StudentList>
+class StudentList : public std::list<Student*>, public Singletons<StudentList>, public ListPrinter
 {
     private:
-    StudentList() : AList<Student, StudentList>("Student List") {}
-    StudentList(std::string name) : AList<Student, StudentList>(name) {}
-    
+    friend class Singletons<StudentList>;
+
+    private:
+        StudentList(){}
+        StudentList(std::string name) = delete;
+        StudentList(const StudentList& other) = delete;
+
     public:
-    std::string getName() const { return _name; }
+
 };
 
 

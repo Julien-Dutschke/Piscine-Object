@@ -1,20 +1,24 @@
 #ifndef __STAFFLIST_HPP__
 #define __STAFFLIST_HPP__
 
-#include "AList.hpp"
-
 #include "Staff.hpp"
+#include "Singletons.hpp"
+#include <list>
+#include "ListPrinter.hpp"
 
-#include <vector>
 
-class StaffList : public AList<Staff, StaffList>
+class StaffList : public std::list<Staff*>, public Singletons<StaffList>, public ListPrinter
 {
     private:
-    StaffList() : AList<Staff, StaffList>("Staff List") {}
-    StaffList(std::string name) : AList<Staff, StaffList>(name) {}
-    
-    public:
-     std::string getName() const { return _name; }
+    friend class Singletons<StaffList>;
+
+    private :
+        StaffList(){};
+        StaffList(std::string name) = delete;
+        StaffList(const StaffList& other) = delete;
+
+    public :
+
 };
 
-#endif
+#endif // __STAFFLIST_HPP

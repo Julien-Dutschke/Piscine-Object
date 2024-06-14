@@ -14,11 +14,18 @@ class Room
 
     public:
         Room();
+        long long getID(){return _ID;}
         bool canEnter(Person*);
         void enter(Person*);
         void exit(Person*);
         
         void printOccupant();
 };
+
+std::ostream& operator<<(std::ostream& os, Room& p_room)
+{
+    os << "Room id is :" << p_room.getID();
+    return (os);
+}
 
 #endif // __ROOM_HPP__
