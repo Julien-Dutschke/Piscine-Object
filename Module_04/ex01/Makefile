@@ -1,6 +1,6 @@
 NAME = School_Simulator
 
-SRC =  *.cpp
+SRC =  main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

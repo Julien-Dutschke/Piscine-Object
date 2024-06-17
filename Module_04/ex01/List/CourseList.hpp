@@ -1,8 +1,8 @@
 #ifndef __COURSELIST_HPP__
 #define __COURSELIST_HPP__
 
-#include "Course.hpp"
-#include "Singletons.hpp"
+#include "../Course.hpp"
+#include "../Patern/Singletons.hpp"
 #include <list>
 #include "ListPrinter.hpp"
 

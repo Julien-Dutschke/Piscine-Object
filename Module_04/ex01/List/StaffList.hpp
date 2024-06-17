@@ -1,8 +1,8 @@
 #ifndef __STAFFLIST_HPP__
 #define __STAFFLIST_HPP__
 
-#include "Staff.hpp"
-#include "Singletons.hpp"
+#include "../Staff.hpp"
+#include "../Patern/Singletons.hpp"
 #include <list>
 #include "ListPrinter.hpp"
 

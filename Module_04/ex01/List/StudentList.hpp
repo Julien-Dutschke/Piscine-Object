@@ -1,9 +1,9 @@
 #ifndef __STUDENTLIST_HPP__
 #define __STUDENTLIST_HPP__
 
-#include "Student.hpp"
+#include "../Student.hpp"
 #include <list>
-#include "Singletons.hpp"
+#include "../Patern/Singletons.hpp"
 #include "ListPrinter.hpp"
 
 class StudentList : public std::list<Student*>, public Singletons<StudentList>, public ListPrinter

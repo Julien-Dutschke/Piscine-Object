@@ -1,8 +1,8 @@
-#include "StudentList.hpp"
-#include "StaffList.hpp"
-#include "CourseList.hpp"
+#include "List/StudentList.hpp"
+#include "List/StaffList.hpp"
+#include "List/CourseList.hpp"
+#include "List/RoomList.hpp"
 #include <iostream>
-#include "RoomList.hpp"
 
 int main()
 {
