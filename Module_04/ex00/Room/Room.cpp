@@ -1,9 +1,9 @@
 #include "Room.hpp"
 
 
-Room::Room(long long p_ID, RoomType p_type) : IRoom(p_ID, p_type){}
+IRoom::IRoom(long long p_ID, Grade p_type) : IRoom(p_ID, p_type){}
 
-bool Room::canEnter(Person* p_person)
+bool IRoom::canEnter(Person* p_person)
 {
     if (p_person->getType() >= _type)
     {
@@ -12,7 +12,7 @@ bool Room::canEnter(Person* p_person)
     return false;
 }
 
-void Room::enter(Person* p_person)
+void IRoom::enter(Person* p_person)
 {
     if (canEnter(p_person))
     {
@@ -22,16 +22,23 @@ void Room::enter(Person* p_person)
     }
 }
 
-void Room::exit(Person* p_person)
+void IRoom::exit(Person* p_person)
 {
     if (find(p_person) != nullptr)
     {
-        _occupants.erase(std::remove(_occupants.begin(), _occupants.end(), p_person), _occupants.end());
-        p_person->setRoom(nullptr);
+        for(auto it = _occupants.begin(), ite = _occupants.end(); it != ite; it++)
+            {
+                if((*it) == p_person)
+				{
+					_occupants.erase(it);
+					p_person->setRoom(nullptr);
+					return;
+				}
+            }
     }
 }
 
-Person* Room::find(Person* p_person)
+Person* IRoom::find(Person* p_person)
 {
     for(auto it = _occupants.begin(), ite = _occupants.end(); it != ite; ++it)
     {
@@ -43,7 +50,7 @@ Person* Room::find(Person* p_person)
     return nullptr;
 }
 
-void Room::printOccupant()
+void IRoom::printOccupant()
 {
     std::cout << "Occupants of the room " << _ID << " are: " << std::endl;
     for(auto it = _occupants.begin(), ite = _occupants.end(); it != ite; ++it)
@@ -52,7 +59,7 @@ void Room::printOccupant()
     }
 }
 
-virtual bool Room::isInRoom(Person* p_person)
+bool IRoom::isInRoom(Person* p_person)
 {
     for(auto it = _occupants.begin(), ite = _occupants.end(); it != ite; it++)
     {

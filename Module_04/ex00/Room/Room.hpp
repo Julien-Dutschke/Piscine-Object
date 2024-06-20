@@ -5,6 +5,7 @@
 #include "../Person/Person.hpp"
 #include <memory>
 
+
 class IRoom
 {
     protected:
@@ -32,6 +33,17 @@ class IRoom
     
 
 };
+
+std::ostream& operator<<(std::ostream& p_out, IRoom& p_room)
+{
+    p_out << "Room ID: " << p_room.getID() << std::endl;
+    p_out << "Occupants: " << std::endl;
+    for(auto it = p_room.getOccupants().begin(), ite = p_room.getOccupants().end(); it != ite; ++it)
+    {
+        std::cout << *(*it) << std::endl; 
+    }
+    return p_out;
+}
 
 
 #endif // __ROOM_HPP__

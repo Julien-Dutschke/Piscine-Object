@@ -4,6 +4,7 @@
 #include <vector>
 #include "../Person.hpp"
 #include "../../Cours/Cours.hpp"
+#include "../../Room/Type/Classroom.hpp"
 
 class Student : public Person
 {
@@ -24,7 +25,7 @@ public:
     }
 	void attendClass(Classroom* p_classroom)
     {
-        //verifier si l'etudiant est inscrit au cours correspondant a la salle si oui il peut y aller sinon il ne peut pas
+        std::cout << "IMPLEMENT THE ATTENDCLASS METHOD" << std::endl;
     }
 
 	void exitClass()
@@ -32,7 +33,10 @@ public:
         if(_currentRoom != nullptr)
             _currentRoom->exit(this);
     }
-	void graduate(Cours* p_Cours);
+	void graduate(Cours* p_Cours)
+    {
+        std::cout << "INPLEMENT THE GRADUATE METHOD" << std::endl;
+    }
 };
 
 #endif // __STUDENT_HPP__
