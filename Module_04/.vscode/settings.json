@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.tcc": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -12,11 +13,11 @@
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
-        "*.tcc": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
         "cstdint": "cpp",
         "deque": "cpp",
+        "list": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",
