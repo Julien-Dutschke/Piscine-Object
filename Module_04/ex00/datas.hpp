@@ -11,6 +11,19 @@ You can change return type to ... Whatever you like.
 Anything, as long as you think it's smarter that what is currently writed in this file.
 */
 
+class Person
+{
+private:
+	std::string _name;
+	Room* _currentRoom;
+public:
+	Personne(std::string p_name);
+	Room* room() {return (_currentRoom);}
+};
+
+
+
+
 class Course
 {
 private:
@@ -83,15 +96,6 @@ public:
 
 };
 
-class Person
-{
-private:
-	std::string _name;
-	Room* _currentRoom;
-public:
-	Personne(std::string p_name);
-	Room* room() {return (_currentRoom);}
-};
 
 class Staff : public Person
 {
