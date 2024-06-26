@@ -7,14 +7,14 @@ void Person::enterRoom(IRoom* p_room)
 {
     if (_currentRoom == nullptr)
     {
-        _currentRoom = p_room;
-        p_room->addOccupant(this);
+        if (p_room->addOccupant(this) == true)
+            _currentRoom = p_room;
     }
     else
     {
         _currentRoom->removeOccupant(this);
-        _currentRoom = p_room;
-        p_room->addOccupant(this);
+        if (p_room->addOccupant(this) == true)
+            _currentRoom = p_room;
     }
         
 }

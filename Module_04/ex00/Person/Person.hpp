@@ -24,6 +24,17 @@ class Person
     IRoom* getRoom();
 };
 
+class Student : public Person
+{
+    private:
+    // ! std::vector<Course*> _subscribedCourse;
+    public:
+    //void attendClass(Classroom* p_classroom);
+	//void exitClass();
+	//void graduate(Course* p_course);
+    Student(std::string p_name) : Person(p_name, e_status::STUDENT){}
+};
+
 std::ostream& operator<<(std::ostream& p_ostream, const Person& p_person);
 
 #endif

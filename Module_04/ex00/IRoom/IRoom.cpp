@@ -7,12 +7,13 @@ std::string IRoom::getName() const { return _name;}
 
 std::vector<Person*> IRoom::getOccupants() const { return _listOccupants; }
 
-void IRoom::addOccupant(Person* p_person)
+bool  IRoom::addOccupant(Person* p_person)
 {
     if (isInside(p_person) == true)
-        return;
+        return false;
     else
         _listOccupants.push_back(p_person);
+    return true;
 }
 
 void IRoom::removeOccupant(Person* p_person)
@@ -45,4 +46,17 @@ std::ostream& operator<<(std::ostream& p_ostream, const IRoom& p_room)
         p_ostream << *occupant << std::endl;
     }
     return p_ostream;
+}
+
+
+StaffRoom::StaffRoom() : IRoom("Only Staff"){}
+
+
+bool StaffRoom::addOccupant(Person* p_person)
+{
+    if (p_person->getStatus() >= e_status::STAFF)
+    {
+        return IRoom::addOccupant(p_person);
+    }
+    return false;
 }
