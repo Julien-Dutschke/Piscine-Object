@@ -4,6 +4,8 @@
 
 #include "iostream"
 
+
+
 enum class FormType
 {
 	CourseFinished,
@@ -11,6 +13,7 @@ enum class FormType
 	NeedCourseCreation,
 	SubscriptionToCourse
 };
+
 
 
 
@@ -45,6 +48,8 @@ class Form
 		std::cout << "Form created\n";
 	}
 
+	virtual ~Form(){}
+	
 	bool isSigned() const
 	{
 		return _isSigned;
@@ -59,9 +64,19 @@ class Form
 class CourseFinishedForm : public Form
 {
 	private:
-	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
-	CourseFinishedForm() : Form(FormType::CourseFinished){}
+	std::string _nameCourseToFinished;
+	
 
+	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
+	//creation interactive du formulaire
+	CourseFinishedForm() : Form(FormType::CourseFinished)
+	{
+		std::cout << "Enter the name of the course to finish: ";
+		std::cin >> _nameCourseToFinished;
+		std::cout << "the course to finish is : " << _nameCourseToFinished << std::endl;
+	}
+
+	
 	public:
 		void execute() override
 		{
@@ -70,7 +85,8 @@ class CourseFinishedForm : public Form
 				std::cout << "Form not signed\n";
 				return;
 			}
-			std::cout << "CourseFinishedForm\n";
+			std::cout << "CourseFinishedForm activate\n";
+			// TODO ... finish the course
 		}
 };
 
@@ -78,7 +94,8 @@ class NeedMoreClassRoomForm : public Form
 {
 	private:
 	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
-	NeedMoreClassRoomForm() : Form(FormType::NeedCourseCreation){}
+	NeedMoreClassRoomForm() : Form(FormType::NeedCourseCreation){
+	}
 	
 	public:
 		void execute() override

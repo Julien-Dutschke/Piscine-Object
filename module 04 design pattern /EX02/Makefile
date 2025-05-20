@@ -4,7 +4,11 @@ CXX = c++
 CXXFLAGS = -Wall -Werror  -Wextra -pedantic -MMD -g3
 
 #Fichiers sources
-SRCS = main.cpp 
+SRCS = main.cpp\
+		Source/StudentList.cpp\
+		Source/RoomList.cpp\
+		Source/CourseList.cpp\
+		Source/StaffList.cpp\
 
 #Fichiers objets
 OBJS = $(SRCS:.cpp=.o)

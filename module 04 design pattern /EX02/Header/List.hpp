@@ -5,9 +5,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
-
-
 #include <algorithm>
 #include <list>
 
@@ -75,90 +72,52 @@ class AList : public std::list<T>
 class StudentList : public AList<Student> , public Singleton<StudentList>
 {
 	protected:
-		StudentList() {std::cout << "StudentList created\n";}
+		StudentList();
 	public:
 		// Déclare Singleton comme amie de cette classe
 		friend class Singleton<StudentList>;
 
-		~StudentList() {std::cout << "StudentList destroyed\n";}
-		void display() const 
-		{
-			std::cout << "number of students: " << _items.size() << std::endl;
-			std::list<Student>::const_iterator it;
-				std::cout << "StudentList::display() called\n";
-			for (it = _items.begin(); it != _items.end(); ++it)
-			{
-				std::cout << "Student: " << it->getName() << std::endl;
-				//std::cout << it << "\n";
-			}	
-		}
+		~StudentList();
+		void display() const ;
 };
 
 class RoomList : public AList<Room>, public Singleton<RoomList>
 {
 	protected:
-		RoomList() {std::cout << "RoomList created\n";}
+		RoomList();
 	public:
 		// Déclare Singleton comme amie de cette classe
 		friend class Singleton<RoomList>;
 
-		~RoomList() {std::cout << "RoomList destroyed\n";}
-		void display() const 
-		{
-			std::cout << "number of rooms: " << _items.size() << std::endl;
-			std::list<Room>::const_iterator it;
-				std::cout << "RoomList::display() called\n";
-			for (it = _items.begin(); it != _items.end(); ++it)
-			{
-				std::cout << "Room: " << it->getID() << std::endl;
-				//std::cout << it << "\n";
-			}	
-		}
+		~RoomList();
+
+		void display() const ;
 
 };
 
 class CourseList : public AList<Course>, public Singleton<CourseList>
 {
 	protected:
-		CourseList() {std::cout << "CourseList created\n";}
+		CourseList();
 	public:
 		// Déclare Singleton comme amie de cette classe
 		friend class Singleton<CourseList>;
 
-		~CourseList() {std::cout << "CourseList destroyed\n";}
-		void display() const 
-		{
-			std::cout << "number of courses: " << _items.size() << std::endl;
-			std::list<Course>::const_iterator it;
-				std::cout << "CourseList::display() called\n";
-			for (it = _items.begin(); it != _items.end(); ++it)
-			{
-				std::cout << "Course: " << it->getName() << std::endl;
-				//std::cout << it << "\n";
-			}	
-		}
+		~CourseList();
+		void display() const ;
+
 };
 
 class StaffList : public AList<Person>, public Singleton<StaffList>
 {
 	protected:
-		StaffList() {std::cout << "StaffList created\n";}
+		StaffList();
 	public:
 		// Déclare Singleton comme amie de cette classe
 		friend class Singleton<StaffList>;
 
-		~StaffList() {std::cout << "StaffList destroyed\n";}
-		void display() const 
-		{
-			std::cout << "number of staff: " << _items.size() << std::endl;
-			std::list<Person>::const_iterator it;
-				std::cout << "StaffList::display() called\n";
-			for (it = _items.begin(); it != _items.end(); ++it)
-			{
-				std::cout << "Staff: " << it->getName() << std::endl;
-				//std::cout << it << "\n";
-			}	
-		}
+		~StaffList();
+		void display() const;
 };
 #endif // __LIST_HPP__
 

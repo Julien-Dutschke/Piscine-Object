@@ -30,7 +30,7 @@ class tools
 		else
 			return false;
 	}
-
+	
 
 };
 
@@ -59,13 +59,13 @@ int main()
 	// !Create d'un type de Formulaire
 	std::cout << "Le test de declaration de la classe Form est desactiver a cause de la nouvelle factory\n";
 	tools::printLine();
-	//CourseFinishedForm courseFinishedForm;
-	//(void) courseFinishedForm;	
-	// ! DEPRECATED 
+	//! CourseFinishedForm courseFinishedForm;
+	//! (void) courseFinishedForm;	
+	//! DEPRECATED 
 
 	//* Test aditionnel pour verifier les Singletons 
 
-	// creation de la StudentList
+	// creation de student
 	std::cout << "test de la declaration de la classe Student\n";
 	class Student student;
 	(void) student;
@@ -125,7 +125,7 @@ int main()
 	Secretary secretary_factory;
 	Headmaster executerMaster;
 
-	Form* formCourseFinish = secretary_factory.createForm(FormType::NeedCourseCreation);
+	Form* formCourseFinish = secretary_factory.createForm(FormType::CourseFinished);
 	std::cout << "les test suivants sont pour verifier le bon fonctionnement de la factory\n";
 	std::cout << "0 si c'est pas le bon type et 1 si c'est le bon type\n";
 	std::cout << "le formulaire [CourseFinished] : " << tools::isOfType<Form, CourseFinishedForm>(formCourseFinish) << std::endl;
@@ -135,7 +135,10 @@ int main()
 
 	executerMaster.signForm(formCourseFinish);
 	formCourseFinish->execute();
-	
+
+	//delete formCourseFinish;
+	delete formCourseFinish;
+
 	return 0;
 }
 

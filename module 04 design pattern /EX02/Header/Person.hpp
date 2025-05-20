@@ -6,15 +6,15 @@
 # include <vector>
 # include <iostream>
 
+# include "Form.hpp"
+
 class Room;
 class Course;
 class Form;
 class Person;
 class Classroom;
-class Form;
 class Course;
 
-enum class FormType;
 
 class Person
 {
