@@ -9,12 +9,24 @@ class Course;
 class Form;
 class Person;
 
+//TODO Changer le type string pour type par un enum class 
+
+enum class RoomType
+{
+	Room,
+	ClassRoom,
+	Secretaria,
+	HeadmasterOffice,
+	StaffRestRoom,
+	Courtyard
+};
+
 class Room
 {
 	protected:
 	long long _ID;
 	static long long _IDCounter;
-	std::string _type;
+	RoomType _type;
 
 	std::vector<Person*> _occupants;
 
@@ -22,7 +34,7 @@ class Room
 	Room();
 	~Room();
 
-	std::string getType() const;
+	RoomType getType() const;
 	bool canEnter(Person* p);
 	void enter(Person* p);
 	void exit(Person* p);

@@ -4,7 +4,7 @@
 SecretarialOffice::SecretarialOffice() : Room()
 {
 	std::cout << "SecretarialOffice created\n";
-	_type = "SecretarialOffice";
+	_type = RoomType::Secretaria;
 }
 
 SecretarialOffice::~SecretarialOffice()

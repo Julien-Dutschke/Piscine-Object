@@ -4,7 +4,7 @@
 StaffRestRoom::StaffRestRoom() : Room()
 {
 	std::cout << "StaffRestRoom created\n";
-	_type = "StaffRestRoom";
+	_type = RoomType::StaffRestRoom;
 }
 
 StaffRestRoom::~StaffRestRoom()

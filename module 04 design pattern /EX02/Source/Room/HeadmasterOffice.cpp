@@ -3,7 +3,7 @@
 HeadmasterOffice::HeadmasterOffice() : Room()
 {
 	std::cout << "HeadmasterOffice created\n";
-	_type = "HeadmasterOffice";
+	_type = RoomType::HeadmasterOffice;
 }
 
 HeadmasterOffice::~HeadmasterOffice()

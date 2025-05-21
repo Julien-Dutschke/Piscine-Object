@@ -3,7 +3,7 @@
 Courtyard::Courtyard() : Room()
 {
 	std::cout << "Courtyard created\n";
-	_type = "Courtyard";
+	_type = RoomType::Courtyard;
 }
 
 Courtyard::~Courtyard()

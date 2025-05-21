@@ -2,7 +2,7 @@
 
 long long Room::_IDCounter = 0;
 
-Room::Room() : _ID(_IDCounter), _type("Room")
+Room::Room() : _ID(_IDCounter), _type(RoomType::ClassRoom)
 {
 	std::cout << "Room created\n";
 	_IDCounter++;
@@ -58,7 +58,7 @@ void Room::printOccupant()
 	std::cout << "Need an implementation\n";
 }
 
-std::string Room::getType() const
+RoomType Room::getType() const
 {
 	return _type;	
 }

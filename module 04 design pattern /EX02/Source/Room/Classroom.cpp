@@ -3,7 +3,7 @@
 Classroom::Classroom() : Room()
 {
 	std::cout << "Classroom created\n";
-	_type = "Classroom";
+	_type = RoomType::ClassRoom;
 	_currentCourse = nullptr;
 }
 
