@@ -1,6 +1,6 @@
-#include "../Header/List.hpp"
+#include "../../Header/List.hpp"
 
-#include "../Header/Course.hpp"
+#include "../../Header/Course.hpp"
 
 CourseList::CourseList()
 {

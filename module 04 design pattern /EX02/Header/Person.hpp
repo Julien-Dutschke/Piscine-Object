@@ -15,7 +15,6 @@ class Person;
 class Classroom;
 class Course;
 
-
 class Person
 {
 	protected:
@@ -23,16 +22,13 @@ class Person
 		Room* _currentRoom;
 
 	public:
-		bool operator==(const Person& p_person) const
-		{
-			return this == &p_person;
-		}
+		bool operator==(const Person& p_person) const;
 
-		std::string getName() const {return _name;}
-		void setName(std::string p_name) {_name = p_name;}
-		Person(){std::cout << "Person created\n";}
-		Person(const std::string& name) : _name(name), _currentRoom(nullptr) {}
-		virtual ~Person() = default;
+		std::string getName() const;
+		void setName(std::string p_name);
+		Person();
+		Person(const std::string& name);
+		virtual ~Person();
 };
 
 
@@ -42,7 +38,7 @@ class Student : public Person
 		std::vector<Course*> _subscribedCourse;
 	
 	public:
-	Student(){};
+	Student();
 	void attendClass(Classroom* p_classroom);
 	void exitClass();
 	void graduate(Course* p_course);
@@ -53,8 +49,9 @@ class Staff : public Person
 	protected:
 
 	public:
-	Staff() : Person("Staff") {}
-		void sign(Form* p_form){(void) p_form;}
+		Staff();
+		Staff(std::string name);
+		virtual ~Staff();
 };
 
 class Professor : public Staff
@@ -62,6 +59,9 @@ class Professor : public Staff
 	private:
 		Course* _currentCourse;
 	public:
+		Professor();
+		virtual ~Professor();
+
 		void assignCourse(Course* p_course);
 		void doClass();
 		void closeCourse();
@@ -76,35 +76,13 @@ class Headmaster : public Staff
 
 		void sign(Form* p_form){p_form->sign();}
 	public:
-		bool validateForm(Form* p_form)
-		{
-			if (p_form == nullptr)
-				return false;
-			if (p_form->isSigned())
-			{
-				p_form->execute();
-				return true;
-			}
-			else
-			{
-				std::cout << "Form not signed\n";
-				return false;
-			}
-		}
+		Headmaster();
+		~Headmaster();
 
-		bool signForm(Form* p_form)
-		{
-			if (p_form == nullptr)
-				return false;
-			else
-			{
-				sign(p_form);
-				return true;
-			}
-		}
-
-
+		bool validateForm(Form* p_form);
+		bool signForm(Form* p_form);
 		void receiveForm(Form* p_form);
+
 };
 
 class Secretary : public Staff
@@ -112,22 +90,9 @@ class Secretary : public Staff
 	private:
 
 	public:
-		Form* createForm(FormType p_formType)
-		{
-			switch (p_formType)
-			{
-				case FormType::CourseFinished:
-					return new CourseFinishedForm();
-				case FormType::NeedMoreClassRoom:
-					return new NeedMoreClassRoomForm();
-				case FormType::NeedCourseCreation:
-					return new NeedCourseCreationForm();
-				case FormType::SubscriptionToCourse:
-					return new SubscriptionToCourseForm();
-				default:
-					return nullptr;
-			}
-		}
+		Secretary();
+		~Secretary();
+		Form* createForm(FormType p_formType);
 		void archiveForm(){}
 };
 

@@ -1,6 +1,6 @@
-#include "../Header/List.hpp"
+#include "../../Header/List.hpp"
 
-#include "../Header/Person.hpp"
+#include "../../Header/Person.hpp"
 
 StaffList::StaffList()
 {

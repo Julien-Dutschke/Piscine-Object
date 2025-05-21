@@ -11,6 +11,7 @@
 #include "Person.hpp"
 #include "Patern.hpp"
 
+
 // This is a simple list class that uses std::list from the STL
 template <class T>
 class AList : public std::list<T>
@@ -81,6 +82,8 @@ class StudentList : public AList<Student> , public Singleton<StudentList>
 		void display() const ;
 };
 
+
+
 class RoomList : public AList<Room>, public Singleton<RoomList>
 {
 	protected:
@@ -95,6 +98,8 @@ class RoomList : public AList<Room>, public Singleton<RoomList>
 
 };
 
+
+
 class CourseList : public AList<Course>, public Singleton<CourseList>
 {
 	protected:
@@ -107,6 +112,8 @@ class CourseList : public AList<Course>, public Singleton<CourseList>
 		void display() const ;
 
 };
+
+
 
 class StaffList : public AList<Person>, public Singleton<StaffList>
 {

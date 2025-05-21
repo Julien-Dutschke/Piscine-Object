@@ -32,29 +32,17 @@ class Form
 	protected:
 
 	FormType _formType;
-	bool _isSigned = false;
+	bool _isSigned;
 
 
-	void sign(){
-		_isSigned = true;
-		std::cout << "Form has been signed\n";
-	}
-
-	friend class Headmaster; //* Seul les classes heritant de Staff peuvent acceder a la fonction sign
+	void sign();
+	friend class Headmaster; //* Seul le Headmaster peut signer le formulaire
 
 	public :
-	Form(FormType p_formType) : _formType(p_formType)
-	{
-		std::cout << "Form created\n";
-	}
-
-	virtual ~Form(){}
+	Form(FormType p_formType);
+	virtual ~Form();
 	
-	bool isSigned() const
-	{
-		return _isSigned;
-	}
-
+	bool isSigned() const;
 	virtual void execute() = 0;
 
 };
@@ -68,82 +56,58 @@ class CourseFinishedForm : public Form
 	
 
 	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
+	friend class Headmaster; //* Seul le Headmaster peut signer le formulaire
+	
 	//creation interactive du formulaire
-	CourseFinishedForm() : Form(FormType::CourseFinished)
-	{
-		std::cout << "Enter the name of the course to finish: ";
-		std::cin >> _nameCourseToFinished;
-		std::cout << "the course to finish is : " << _nameCourseToFinished << std::endl;
-	}
+	CourseFinishedForm();
+	~CourseFinishedForm();
 
 	
 	public:
-		void execute() override
-		{
-			if (isSigned() == false)
-			{
-				std::cout << "Form not signed\n";
-				return;
-			}
-			std::cout << "CourseFinishedForm activate\n";
-			// TODO ... finish the course
-		}
+		void execute() override;
 };
 
 class NeedMoreClassRoomForm : public Form
 {
 	private:
+	
 	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
-	NeedMoreClassRoomForm() : Form(FormType::NeedCourseCreation){
-	}
+	friend class Headmaster; //* Seul le Headmaster peut signer le formulaire
+	NeedMoreClassRoomForm();
+	~NeedMoreClassRoomForm();
 	
 	public:
-		void execute() override
-		{
-			if (isSigned() == false)
-			{
-				std::cout << "Form not signed\n";
-				return;
-			}
-			std::cout << "NeedMoreClassRoomForm\n";
-		}
+		void execute() override;
 };
 
 class NeedCourseCreationForm : public Form
 {
 	private:
+	std::string _nameCourseToCreate;
+
 	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
-	NeedCourseCreationForm() : Form(FormType::NeedCourseCreation){}
+	friend class Headmaster; //* Seul le Headmaster peut signer le formulaire
+
+	NeedCourseCreationForm();
+	~NeedCourseCreationForm();
 
 	public:
-		void execute() override
-		{
-			if (isSigned() == false)
-			{
-				std::cout << "Form not signed\n";
-				return;
-			}
-			std::cout << "NeedCourseCreationForm\n";
-
-		}
+		void execute() override;
 };
 
 class SubscriptionToCourseForm : public Form
 {
 	private:
+	std::string _nameCourseToSubscribe;
+
 	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
-	SubscriptionToCourseForm() : Form(FormType::SubscriptionToCourse){}
+	friend class Headmaster; //* Seul le Headmaster peut signer le formulaire
+
+	SubscriptionToCourseForm();
+	~SubscriptionToCourseForm();
 
 	public:
-		void execute() override
-		{
-			if (isSigned() == false)
-			{
-				std::cout << "Form not signed\n";
-				return;
-			}
-			std::cout << "SubscriptionToCourseForm\n";
-		}
+		void execute() override;
 };
 
 

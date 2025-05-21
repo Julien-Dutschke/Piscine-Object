@@ -135,8 +135,6 @@ int main()
 
 	executerMaster.signForm(formCourseFinish);
 	formCourseFinish->execute();
-
-	//delete formCourseFinish;
 	delete formCourseFinish;
 
 	return 0;

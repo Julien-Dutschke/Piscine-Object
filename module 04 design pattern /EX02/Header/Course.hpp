@@ -19,35 +19,17 @@ class Course
 		size_t _maximumNumberOfStudent;
 
 	public:
-			Course(std::string p_name) : _name(p_name), _professor(nullptr), _numberOfClassToGraduate(0), _maximumNumberOfStudent(0){}
-			void assign(Professor* p_professor)
-			{
-				_numberOfClassToGraduate = 0;
-				_professor = p_professor;                                                                                                                                                                                                                                                                                                                                                           
-			}
+			Course(std::string p_name);
+			virtual ~Course();
+			void assign(Professor* p_professor);
 
-			std::string getName() const
-			{
-				return _name;
-			}
+			std::string getName() const;
 
-			Professor* getProfessor() const
-			{
-				return _professor;
-			}
+			Professor* getProfessor() const;
 
-			void subscribe(Student* p_student)
-			{
-				if (_students.size() < _maximumNumberOfStudent)
-				{
-					_students.push_back(p_student);
-				}
-			}
+			void subscribe(Student* p_student);
 
-			bool operator==(const Course& p_course) const
-			{
-				return _name == p_course._name;
-			}
+			bool operator==(const Course& p_course) const;
 };
 
 #endif 
