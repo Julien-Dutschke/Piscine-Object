@@ -9,6 +9,10 @@ RoomList::RoomList()
 RoomList::~RoomList()
 {
 	std::cout << "RoomList destroyed\n";
+	//on free toute les room
+
+	std::list<Room>::iterator it;
+	clear();
 }
 
 void RoomList::display() const 

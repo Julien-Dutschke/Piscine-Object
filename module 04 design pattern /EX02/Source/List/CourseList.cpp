@@ -22,3 +22,18 @@ void CourseList::display() const
 		std::cout << "Course: " << it->getName() << std::endl;
 	}	
 }
+
+// retourne le cours qui a le nom p_name et pas une copie
+// retourne nullptr si le cours n'existe pas
+Course* CourseList::getCourse(std::string p_name)
+{
+	std::list<Course>::iterator it;
+	for (it = _items.begin(); it != _items.end(); ++it)
+	{
+		if (it->getName() == p_name)
+			return &(*it);
+	}
+	return nullptr;
+}
+
+

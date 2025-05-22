@@ -3,7 +3,8 @@
 NeedCourseCreationForm::NeedCourseCreationForm() : Form(FormType::NeedCourseCreation)
 {
 	std::cout << "Enter the name of the course to create: ";
-	std::cin >> _nameCourseToCreate;
+	//std::cin >> _nameCourseToCreate;
+	_nameCourseToCreate = "French";
 	std::cout << "the course to create is : " << _nameCourseToCreate << std::endl;
 }
 

@@ -3,7 +3,8 @@
 SubscriptionToCourseForm::SubscriptionToCourseForm() : Form(FormType::SubscriptionToCourse)
 {
 	std::cout << "Enter the name of the course to subscribe: ";
-	std::cin >> _nameCourseToSubscribe;
+	//std::cin >> _nameCourseToSubscribe;
+	_nameCourseToSubscribe = "english";
 	std::cout << "the course to subscribe is : " << _nameCourseToSubscribe << std::endl;
 }
 

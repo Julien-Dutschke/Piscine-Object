@@ -1,7 +1,13 @@
 #include "../../Header/Form.hpp"
+#include "../../Header/List.hpp"
+#include "../../Header/Room.hpp"
 
 NeedMoreClassRoomForm::NeedMoreClassRoomForm() : Form(FormType::NeedCourseCreation)
 {
+	std::cout << "Enter the number of classroom needed: ";
+	//std::cin >> _numberOfClassRoomNeeded;
+	_numberOfClassRoomNeeded = 5;
+	std::cout << "the number of classroom needed is : " << _numberOfClassRoomNeeded << std::endl;
 }
 
 NeedMoreClassRoomForm::~NeedMoreClassRoomForm()
@@ -17,5 +23,16 @@ void NeedMoreClassRoomForm::execute()
 		std::cout << "Form not signed\n";
 		return;
 	}
-	std::cout << "NeedMoreClassRoomForm\n";
+	//on ajoute le nombre de classeRoom Demander dans la liste de Room
+	RoomList* list = RoomList::getInstance();
+		
+	std::cout << "le Formulaire est bon\n";
+	while(_numberOfClassRoomNeeded > 0)
+	{
+		std::cout << "creation en cours\n";
+		Classroom classroom;
+		list->add(classroom); // Ajoute le pointeur directement
+		_numberOfClassRoomNeeded--;
+	}
+	
 }

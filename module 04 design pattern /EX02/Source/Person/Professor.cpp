@@ -43,3 +43,8 @@ void Professor::closeCourse()
 	std::cout << "Closing course: " << _currentCourse->getName() << "\n";
 	_currentCourse = nullptr;
 }
+
+void Professor::setCourse(Course* p_course)
+{
+	_currentCourse = p_course;
+}

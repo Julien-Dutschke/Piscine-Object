@@ -1,4 +1,5 @@
 #include "../../Header/Course.hpp"
+#include "../../Header/Person.hpp"
 #include "iostream"
 
 Course::Course(std::string p_name) : _name(p_name), _professor(nullptr), _numberOfClassToGraduate(0), _maximumNumberOfStudent(0)
@@ -38,3 +39,20 @@ Course::~Course()
 {
 	std::cout << "Course destroyed\n";
 }
+
+//Pour arreter le cours
+
+void Course::stop()
+{
+	//TODO : faire un formulaire de fin de cours
+	std::cout << "Course stopped\n";
+
+	_professor->setCourse(NULL);
+	for (size_t i = 0; i < _students.size(); i++)
+	{
+		_students[i]->leaveCourse(this);
+	}
+	_students.clear();
+	_professor = nullptr;
+}
+

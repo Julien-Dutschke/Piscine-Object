@@ -39,6 +39,7 @@ class Student : public Person
 	
 	public:
 	Student();
+	void leaveCourse(Course* p_course);
 	void attendClass(Classroom* p_classroom);
 	void exitClass();
 	void graduate(Course* p_course);
@@ -58,13 +59,15 @@ class Professor : public Staff
 {
 	private:
 		Course* _currentCourse;
-	public:
+	
+		public:
 		Professor();
 		virtual ~Professor();
 
 		void assignCourse(Course* p_course);
 		void doClass();
 		void closeCourse();
+		void setCourse(Course* p_course);
 };
 
 

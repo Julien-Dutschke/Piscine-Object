@@ -70,7 +70,8 @@ class CourseFinishedForm : public Form
 class NeedMoreClassRoomForm : public Form
 {
 	private:
-	
+	int _numberOfClassRoomNeeded;
+
 	friend class Secretary; //* pour que seul la factory puisse creer le formulaire
 	friend class Headmaster; //* Seul le Headmaster peut signer le formulaire
 	NeedMoreClassRoomForm();

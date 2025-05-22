@@ -22,3 +22,17 @@ void Student::graduate(Course* p_course)
 	_subscribedCourse.push_back(p_course);
 	std::cout << "Student graduated\n";
 }
+
+void Student::leaveCourse(Course* p_course)
+{
+	for (size_t i = 0; i < _subscribedCourse.size(); i++)
+	{
+		if (_subscribedCourse[i] == p_course)
+		{
+			_subscribedCourse.erase(_subscribedCourse.begin() + i);
+			std::cout << "Student left course\n";
+			return;
+		}
+	}
+	std::cout << "Student not subscribed to course\n";
+}

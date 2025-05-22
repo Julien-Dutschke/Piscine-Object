@@ -110,6 +110,7 @@ class CourseList : public AList<Course>, public Singleton<CourseList>
 
 		~CourseList();
 		void display() const ;
+		Course* getCourse(std::string p_name);
 
 };
 

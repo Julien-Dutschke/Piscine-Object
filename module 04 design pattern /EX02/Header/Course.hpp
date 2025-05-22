@@ -30,11 +30,7 @@ class Course
 			void subscribe(Student* p_student);
 
 			bool operator==(const Course& p_course) const;
+			void stop();
 };
 
 #endif 
-
-
-
-
-
