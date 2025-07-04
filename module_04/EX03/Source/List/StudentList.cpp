@@ -15,12 +15,9 @@ StudentList::~StudentList()
 
 void StudentList::display() const 
 {
-	std::cout << "number of students: " << _items.size() << std::endl;
-	std::cout << "StudentList::display() called\n";
-	
 	for (Student *student : _items)
 	{
-		std::cout << "Student: " << student->getName() << std::endl;
+		std::cout << student->getName() << std::endl;
 	}	
 }
 

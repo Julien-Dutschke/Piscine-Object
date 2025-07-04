@@ -88,6 +88,7 @@ class Headmaster : public Staff
 		bool validateForm(Form* p_form);
 		bool signForm(Form* p_form);
 		void receiveForm(Form* p_form);
+		void askProfessorsToTeach();
 
 };
 

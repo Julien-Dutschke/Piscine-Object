@@ -1,5 +1,6 @@
 #include "../../Header/Person.hpp"
 #include "../../Header/Form.hpp"
+#include "../../Header/List.hpp"
 
 Headmaster::Headmaster() : Staff("Headmaster")
 {
@@ -48,5 +49,18 @@ void Headmaster::receiveForm(Form* p_form)
 	{
 		_formToValidate.push_back(p_form);
 		std::cout << "Form received\n";
+	}
+}
+
+void Headmaster::askProfessorsToTeach()
+{
+	StaffList* staffList = StaffList::getInstance();
+	for (auto staff : staffList->getItems())
+	{
+		if (Professor* professor = dynamic_cast<Professor*>(staff))
+		{
+			std::cout << "Le professeur " << professor->getName() << " va faire un cours.\n";
+			professor->doClass();
+		}
 	}
 }

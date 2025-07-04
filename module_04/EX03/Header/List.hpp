@@ -14,7 +14,7 @@
 
 // This is a simple list class that uses std::list from the STL
 template <class T>
-class AList : public std::list<T>
+class AList 
 {
 protected:	
 	std::list<T> _items;
@@ -106,7 +106,7 @@ class CourseList : public AList<Course*>, public Singleton<CourseList>
 
 
 
-class StaffList : public AList<Person *>, public Singleton<StaffList>
+class StaffList : public AList<Staff *>, public Singleton<StaffList>
 {
 	protected:
 		StaffList();

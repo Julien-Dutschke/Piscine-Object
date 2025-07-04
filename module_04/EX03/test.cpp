@@ -5,35 +5,10 @@
 #include "Header/Course.hpp"
 #include "Header/Form.hpp"
 #include "Header/Person.hpp"
+#include <limits>
 #include "Header/List.hpp"
 
-
-
-
-class tools
-{
-	public:
-
-	void static printLine()
-	{
-		std::cout << "----------------------------------------\n";
-	}
-	
-	//verifie si le formulaire est du type dans le quel on veut le caster
-	template<typename T, typename U>
-	static bool isOfType(const T* p_form)
-	{
-		if (p_form == nullptr)
-			return false;
-		if (dynamic_cast<const U*>(p_form) != nullptr)
-			return true;
-		else
-			return false;
-	}
-	
-	
-
-};
+#include "test.hpp"
 
 void testPerson()
 {
@@ -262,6 +237,7 @@ void testPrintAllTypes()
 
 }
 
+
 void testUnitaires()
 {
     testPerson();
@@ -276,10 +252,3 @@ void testUnitaires()
     testPrintAllTypes();
 	clearAllLists();
 }
-
-int main()
-{
-    testUnitaires();
-    return 0;
-}
-

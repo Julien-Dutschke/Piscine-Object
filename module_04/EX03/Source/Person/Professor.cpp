@@ -28,10 +28,11 @@ void Professor::doClass()
 {
 	if (_currentCourse == nullptr)
 	{
-		std::cout << "No course assigned\n";
+		std::cout << "Aucun cours n'est assigner\n";
 		return;
 	}
-	std::cout << "Doing class for course: " << _currentCourse->getName() << "\n";
+	//TODO : mettre en place la logique de cours
+	std::cout << "Lancement du cours :" << _currentCourse->getName() << "\n";
 }
 
 void Professor::closeCourse()

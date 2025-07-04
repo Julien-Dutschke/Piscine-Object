@@ -25,3 +25,4 @@ Person::Person(const std::string& name) : _name(name), _currentRoom(nullptr)
 Person::~Person()
 {
 }
+
